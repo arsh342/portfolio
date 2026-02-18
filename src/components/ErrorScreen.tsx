@@ -156,35 +156,10 @@ export function ErrorScreen({
       digitMap.push(rowData);
     }
 
-    // Round corners — cells to exclude (top-left, top-right, bottom-left, bottom-right)
-    const isCorner = (row: number, col: number) => {
-      const r = 2; // corner radius in cells
-      // Top-left
-      if (row === 0 && col < r) return true;
-      if (row < r && col === 0) return true;
-      if (row === 0 && col === 0) return true;
-      // Top-right
-      if (row === 0 && col >= totalCols - r) return true;
-      if (row < r && col === totalCols - 1) return true;
-      // Bottom-left
-      if (row === totalRows - 1 && col < r) return true;
-      if (row >= totalRows - r && col === 0) return true;
-      // Bottom-right
-      if (row === totalRows - 1 && col >= totalCols - r) return true;
-      if (row >= totalRows - r && col === totalCols - 1) return true;
-      return false;
-    };
-
     // Build the full padded grid — INVERTED: digit pixels are OFF, background is ON
     const result: boolean[] = [];
     for (let row = 0; row < totalRows; row++) {
       for (let col = 0; col < totalCols; col++) {
-        // Corner cells are always off
-        if (isCorner(row, col)) {
-          result.push(false);
-          continue;
-        }
-
         const inDigitArea =
           row >= PAD_Y &&
           row < PAD_Y + DIGIT_ROWS &&

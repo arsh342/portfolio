@@ -58,28 +58,10 @@ function buildGrid(): boolean[] {
     }
     digitMap.push(rowData);
   }
-  // Round corners
-  const isCorner = (row: number, col: number) => {
-    const r = 2;
-    if (row === 0 && col < r) return true;
-    if (row < r && col === 0) return true;
-    if (row === 0 && col >= COLS - r) return true;
-    if (row < r && col === COLS - 1) return true;
-    if (row === ROWS - 1 && col < r) return true;
-    if (row >= ROWS - r && col === 0) return true;
-    if (row === ROWS - 1 && col >= COLS - r) return true;
-    if (row >= ROWS - r && col === COLS - 1) return true;
-    return false;
-  };
-
   // Inverted: digit pixels → dark, background → lit
   const result: boolean[] = [];
   for (let row = 0; row < ROWS; row++) {
     for (let col = 0; col < COLS; col++) {
-      if (isCorner(row, col)) {
-        result.push(false);
-        continue;
-      }
       const inDigitArea =
         row >= PAD_Y &&
         row < PAD_Y + DIGIT_ROWS &&
