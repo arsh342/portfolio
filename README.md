@@ -39,8 +39,8 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Environment Variables
 
-| Variable | Description |
-|---|---|
+| Variable       | Description                               |
+| -------------- | ----------------------------------------- |
 | `GITHUB_TOKEN` | GitHub fine-grained personal access token |
 
 ## Project Structure
@@ -73,11 +73,11 @@ scripts/
 
 ## Scripts
 
-| Command | Description |
-|---|---|
-| `npm run dev` | Start dev server |
-| `npm run build` | Production build |
-| `npm run start` | Start production server |
+| Command                             | Description                           |
+| ----------------------------------- | ------------------------------------- |
+| `npm run dev`                       | Start dev server                      |
+| `npm run build`                     | Production build                      |
+| `npm run start`                     | Start production server               |
 | `node scripts/generate-favicon.mjs` | Regenerate favicon from GitHub avatar |
 
 ## License

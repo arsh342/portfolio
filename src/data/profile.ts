@@ -428,11 +428,10 @@ export const profile = {
   ],
 
   interests: [
-    "AI and LLM tools (anthropics/skills, fastmcp, Complete-AI-Guide)",
-    "Full-stack frameworks and resources (modern-chat-app, Full-stack-projects-fast)",
-    "Developer tooling and APIs (markdown-badges, public-apis)",
-    "Cloud-native and DevOps (Docker, Kubernetes, CI/CD pipelines)",
-    "System design and distributed architectures",
+    "AI Agents & LLM tooling (OpenAI, Anthropic, Gemini AI)",
+    "MCP Servers & Model Context Protocol ecosystem",
+    "Microservices architecture & system design",
+    "Open source contributions & developer tooling",
   ],
 
   interestsCount: 10,
