@@ -165,10 +165,13 @@ export function Hero() {
         transition={{ duration: 0.5 }}
         className="flex items-center justify-between mb-12 pb-4"
       >
-        <span className="text-[13px] font-mono tracking-[0.08em] text-[#888]">
+        <a
+          href="/"
+          className="text-[13px] font-mono tracking-[0.08em] text-[#888] hover:text-[#e5e5e5] transition-colors"
+        >
           portfolio
-        </span>
-        <div className="flex items-center gap-3 sm:gap-5 text-[11px] font-mono tracking-[0.1em] uppercase text-[#666]">
+        </a>
+        <div className="flex items-center gap-2 sm:gap-5 text-[10px] sm:text-[11px] font-mono tracking-[0.1em] uppercase text-[#666]">
           <a
             href={profile.links.github}
             target="_blank"
@@ -177,7 +180,7 @@ export function Hero() {
           >
             GitHub
           </a>
-          <span className="text-[#333]">/</span>
+          <span className="text-[#333] hidden sm:inline">/</span>
           <a
             href={profile.links.linkedin}
             target="_blank"
@@ -186,12 +189,19 @@ export function Hero() {
           >
             LinkedIn
           </a>
-          <span className="text-[#333]">/</span>
+          <span className="text-[#333] hidden sm:inline">/</span>
           <a
             href={`mailto:${profile.links.email}`}
-            className="hover:text-[#e5e5e5] transition-colors cursor-pointer"
+            className="hover:text-[#e5e5e5] transition-colors cursor-pointer hidden sm:inline"
           >
             Contact
+          </a>
+          <span className="text-[#333] hidden sm:inline">/</span>
+          <a
+            href="/resume"
+            className="hover:text-[#e5e5e5] transition-colors cursor-pointer"
+          >
+            Resume
           </a>
         </div>
       </motion.nav>

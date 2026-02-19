@@ -21,6 +21,8 @@ interface GitHubData {
   repoCount: number;
   followers: number;
   avatarUrl: string;
+  repoTags: string[];
+  externalPRsMerged: number;
 }
 
 export function useGitHubData() {

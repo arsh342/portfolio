@@ -463,6 +463,23 @@ async function fetchRepoCommitCount(repoName: string): Promise<number> {
   }
 }
 
+/** Fetch count of PRs authored by the user that were merged in repos they don't own */
+async function fetchExternalPRsMerged(): Promise<number> {
+  try {
+    // Search for merged PRs by the user, excluding their own repos
+    const query = `type:pr+author:${GITHUB_USERNAME}+is:merged+-user:${GITHUB_USERNAME}`;
+    const res = await fetch(
+      `${GITHUB_API}/search/issues?q=${query}&per_page=1`,
+      { headers, cache: "no-store" },
+    );
+    if (!res.ok) return 0;
+    const data = await res.json();
+    return data.total_count ?? 0;
+  } catch {
+    return 0;
+  }
+}
+
 export async function fetchAllGitHubData() {
   const [
     user,
@@ -471,6 +488,7 @@ export async function fetchAllGitHubData() {
     contributionsThisYear,
     contributionGraph,
     trendingInterests,
+    externalPRsMerged,
   ] = await Promise.all([
     fetchGitHubUser(),
     fetchGitHubRepos(),
@@ -478,6 +496,7 @@ export async function fetchAllGitHubData() {
     fetchContributionsThisYear(),
     fetchContributionGraph(),
     fetchTrendingInterests(),
+    fetchExternalPRsMerged(),
   ]);
 
   // Count PRs this year from events
@@ -531,6 +550,9 @@ export async function fetchAllGitHubData() {
     .sort((a, b) => b.commits - a.commits)
     .slice(0, 4);
 
+  // Extract real "In Public Repos" tags from languages + topics
+  const repoTags = computeRepoTags(repos);
+
   return {
     stats,
     languages,
@@ -542,5 +564,163 @@ export async function fetchAllGitHubData() {
     repoCount: user.public_repos,
     followers: user.followers,
     avatarUrl: user.avatar_url,
+    repoTags,
+    externalPRsMerged,
   };
+}
+
+/** Extract top languages and framework/tool topics actually used across public repos,
+ *  supplemented by technologies from the user's GitHub README profile */
+function computeRepoTags(repos: GitHubRepo[]): string[] {
+  const nonFork = repos.filter((r) => !r.fork);
+
+  // Count languages
+  const langCount: Record<string, number> = {};
+  for (const repo of nonFork) {
+    if (repo.language) {
+      langCount[repo.language] = (langCount[repo.language] || 0) + 1;
+    }
+  }
+
+  // Count topics (normalize casing)
+  const topicCount: Record<string, number> = {};
+  // Map topic slugs to display names
+  const TOPIC_DISPLAY: Record<string, string> = {
+    react: "React",
+    reactjs: "React",
+    nextjs: "Next.js",
+    "next-js": "Next.js",
+    nodejs: "Node.js",
+    "node-js": "Node.js",
+    express: "Express.js",
+    expressjs: "Express.js",
+    "spring-boot": "Spring Boot",
+    springboot: "Spring Boot",
+    typescript: "TypeScript",
+    javascript: "JavaScript",
+    java: "Java",
+    python: "Python",
+    tailwindcss: "Tailwind CSS",
+    "tailwind-css": "Tailwind CSS",
+    mongodb: "MongoDB",
+    postgresql: "PostgreSQL",
+    mysql: "MySQL",
+    docker: "Docker",
+    aws: "AWS",
+    firebase: "Firebase",
+    "firebase-auth": "Firebase",
+    "firebase-database": "Firebase",
+    graphql: "GraphQL",
+    "rest-api": "REST API",
+    "react-native": "React Native",
+    stripe: "Stripe",
+    electron: "Electron",
+    "electron-app": "Electron",
+    vite: "Vite",
+    prisma: "Prisma",
+    supabase: "Supabase",
+    "supabase-auth": "Supabase",
+    "supabase-db": "Supabase",
+    vercel: "Vercel",
+    android: "Android",
+    "android-app": "Android",
+    kotlin: "Kotlin",
+    flutter: "Flutter",
+    dart: "Dart",
+    fastapi: "FastAPI",
+    expo: "Expo",
+    "expo-cli": "Expo",
+    "expo-go": "Expo",
+    "google-cloud": "Google Cloud",
+    gcp: "Google Cloud",
+    c: "C",
+    cpp: "C++",
+    "c-plus-plus": "C++",
+    git: "Git",
+    // Additional slugs from actual repo topics
+    cloudinary: "Cloudinary",
+    "gemini-api": "Gemini",
+    redis: "Redis",
+    "socket-io": "Socket.io",
+    socketio: "Socket.io",
+    jwt: "JWT",
+    oauth2: "OAuth2",
+    oauth: "OAuth2",
+    thymeleaf: "Thymeleaf",
+    maven: "Maven",
+    "spring-security": "Spring Security",
+    microservices: "Microservices",
+    micorservices: "Microservices", // typo in actual repo topic
+  };
+
+  for (const repo of nonFork) {
+    for (const topic of repo.topics || []) {
+      const slug = topic.toLowerCase();
+      const display = TOPIC_DISPLAY[slug];
+      if (!display) continue; // skip unknown topic slugs to keep tags clean
+      topicCount[display] = (topicCount[display] || 0) + 1;
+    }
+  }
+
+  // Known tech from README profile (arsh342/README.md) — adds a small weight
+  // so these show up if not enough topics/languages fill the list
+  const README_TECH = [
+    "React",
+    "Next.js",
+    "Tailwind CSS",
+    "Node.js",
+    "Express.js",
+    "Spring Boot",
+    "MongoDB",
+    "MySQL",
+    "Firebase",
+    "Supabase",
+    "AWS",
+    "Google Cloud",
+    "Stripe",
+    "React Native",
+    "Electron",
+    "C",
+    "C++",
+    "Redis",
+    "Socket.io",
+    "Cloudinary",
+    "Gemini",
+    "Microservices",
+    "Git",
+  ];
+
+  // Merge: languages by repo count, topics by repo count
+  const tags = new Map<string, number>();
+
+  // Add languages (these are primary)
+  for (const [lang, count] of Object.entries(langCount)) {
+    tags.set(lang, (tags.get(lang) || 0) + count * 2); // weight languages higher
+  }
+
+  // Add topics/frameworks
+  for (const [topic, count] of Object.entries(topicCount)) {
+    if (tags.has(topic)) {
+      tags.set(topic, tags.get(topic)! + count);
+    } else {
+      tags.set(topic, count);
+    }
+  }
+
+  // Boost README tech — these are technologies the user actually uses.
+  // Add weight whether or not they were already detected from repos,
+  // so they don't get buried beneath languages with many repos.
+  for (const tech of README_TECH) {
+    tags.set(tech, (tags.get(tech) || 0) + 3);
+  }
+
+  // Languages to skip (not interesting as tags)
+  const SKIP_LANGS = new Set(["EJS", "HTML", "CSS", "Shell", "Dockerfile"]);
+
+  // Sort by frequency, take top tags
+  return [...tags.entries()]
+    .filter(([name]) => !SKIP_LANGS.has(name))
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 24)
+    .map(([name]) => name);
 }

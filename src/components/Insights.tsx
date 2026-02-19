@@ -185,7 +185,8 @@ export function Insights() {
   const commitsThisYear =
     data?.stats?.commitsThisYear ?? profile.stats.commitsThisYear;
   const prsThisYear = data?.stats?.prsThisYear ?? profile.stats.prsThisYear;
-  const externalPRsMerged = profile.stats.externalPRsMerged;
+  const externalPRsMerged =
+    data?.externalPRsMerged || profile.stats.externalPRsMerged;
   const contributionGraph = data?.contributionGraph ?? [];
 
   const langColors = [
@@ -256,7 +257,7 @@ export function Insights() {
             In Public Repos
           </h3>
           <div className="flex flex-wrap gap-2 mb-6">
-            {profile.publicRepoTags.map((tag) => (
+            {(data?.repoTags ?? profile.publicRepoTags).map((tag) => (
               <Badge key={tag} variant="accent">
                 {tag}
               </Badge>

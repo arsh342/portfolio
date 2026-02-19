@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { SectionHeader } from "./ui/SectionHeader";
-import { Github, Linkedin, Twitter, Mail } from "lucide-react";
+import { Github, Linkedin, Twitter, Mail, FileText } from "lucide-react";
 import { profile } from "@/data/profile";
 import { useEffect, useRef, useState } from "react";
 import { useGitHubData } from "@/hooks/useGitHubData";
@@ -111,7 +111,7 @@ export function Footer() {
     },
     {
       icon: <Mail size={14} />,
-      label: "website",
+      label: "contact",
       value: profile.links.email,
       url: `mailto:${profile.links.email}`,
     },
@@ -126,6 +126,12 @@ export function Footer() {
       label: "github",
       value: "github.com/arsh342",
       url: profile.links.github,
+    },
+    {
+      icon: <FileText size={14} />,
+      label: "resume",
+      value: "view resume",
+      url: "/resume",
     },
   ];
 

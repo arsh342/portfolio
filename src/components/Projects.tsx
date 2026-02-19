@@ -20,11 +20,11 @@ export function Projects() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {profile.projects.map((project, i) => (
-          <motion.a
+          <motion.div
             key={project.name}
-            href={project.url}
-            target="_blank"
-            rel="noopener noreferrer"
+            onClick={() =>
+              window.open(project.url, "_blank", "noopener,noreferrer")
+            }
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -88,13 +88,19 @@ export function Projects() {
                 </span>
               </div>
               {project.live && (
-                <span className="flex items-center gap-1 text-[10px] font-mono text-[#c97e3a]/70 group-hover:text-[#c97e3a] transition-colors">
+                <a
+                  href={project.live}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  className="flex items-center gap-1 text-[10px] font-mono text-[#c97e3a]/70 hover:text-[#c97e3a] transition-colors"
+                >
                   <ExternalLink size={10} />
                   Live
-                </span>
+                </a>
               )}
             </div>
-          </motion.a>
+          </motion.div>
         ))}
       </div>
     </section>
