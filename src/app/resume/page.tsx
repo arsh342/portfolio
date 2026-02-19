@@ -9,29 +9,19 @@ import {
   Linkedin,
   MapPin,
   ExternalLink,
+  Phone,
 } from "lucide-react";
 import Link from "next/link";
 import { profile } from "@/data/profile";
 
-const experience = [
-  {
-    role: "Open Source Contributor",
-    org: "Various Projects",
-    period: "2025 – Present",
-    bullets: [
-      "Contributed merged PRs to public open-source repositories",
-      "Collaborated with maintainers on bug fixes, documentation, and feature development",
-    ],
-  },
-];
-
 const education = [
   {
-    degree: "Bachelor of Computer Applications (BCA)",
-    school: "Chandigarh University",
-    period: "2024 – 2027",
+    degree: "Bachelor of Engineering in Computer Science",
+    school: "Chitkara University",
+    location: "Punjab, India",
+    period: "Aug 2023 – Jun 2027",
     details:
-      "Relevant coursework: Data Structures, Algorithms, Database Systems, Software Engineering, Object-Oriented Programming",
+      "CGPA: 8.70 — Coursework: Data Structures, Operating Systems, DBMS, Computer Networks",
   },
 ];
 
@@ -40,56 +30,49 @@ const projects = [
     name: "CareerCompass",
     tech: "Next.js · TypeScript · Gemini AI · Stripe",
     bullets: [
-      "AI-powered career platform integrating Gemini AI for career analysis and recommendations",
-      "Implemented Stripe subscription payments, secure authentication, and role-based access control",
-      "Built scalable REST APIs with Next.js App Router; submitted as a hackathon project on Devpost",
+      "Developed AI-powered career platform for a hackathon submission on Devpost",
+      "Designed REST APIs and role-based authentication workflows and integrated Gemini AI and Stripe subscription workflows",
+      "Designed modular frontend architecture to support scalable feature additions and maintainable component structure",
     ],
     url: "https://github.com/arsh342/careercompass",
+    live: "https://careercompassai.vercel.app",
   },
   {
     name: "Job Application Service",
-    tech: "Java · Spring Boot · MongoDB · JWT",
+    tech: "Java · Spring Boot · MongoDB",
     bullets: [
-      "Spring Boot microservices backend with RESTful APIs and JWT-based authentication",
-      "Implemented role separation, request validation, centralized error handling, and MongoDB indexing",
-      "Led team project with layered controller → service → repository architecture",
+      "Led a team project to design a RESTful backend using Spring Boot with JWT-based authentication, role separation, and modular service architecture",
+      "Modeled MongoDB schemas with indexing and validation to ensure efficient querying and consistent data integrity",
+      "Implemented centralized exception handling, request validation, and layered controller→service→repository structure to improve maintainability",
     ],
     url: "https://github.com/arsh342/Job-Application-Service",
   },
   {
-    name: "CollabSpace",
-    tech: "Node.js · Socket.IO · Redis · Stripe",
+    name: "GameVault Mobile App",
+    tech: "React Native",
     bullets: [
-      "Enterprise-grade real-time collaboration platform with SSL/HTTPS and Socket.IO chat",
-      "Built Kanban task management with Redis caching achieving 90% load reduction",
-      "Implemented Stripe payments and 99+ tests with CI/CD pipeline",
-    ],
-    url: "https://github.com/arsh342/collabspace",
-  },
-  {
-    name: "Code Detective",
-    tech: "VS Code · Gemini 3 · TypeScript",
-    bullets: [
-      "AI-powered code archaeology VS Code extension using Gemini 3 multi-agent system",
-      "Features git history investigation, time travel timeline, tech debt scoring, and expertise mapping",
-      "Built for Google DeepMind Gemini 3 Hackathon",
-    ],
-    url: "https://github.com/arsh342/Gemini3",
-  },
-  {
-    name: "GameVault",
-    tech: "React Native · Expo · Zustand · AdMob",
-    bullets: [
-      "Cross-platform mobile app with 10+ board and puzzle games deployed to Google Play Store",
-      "Modular component architecture with optimized state management and Google AdMob integration",
+      "Developed cross-platform mobile application with modular architecture and optimized state management; integrated Google AdMob and published to Play Store",
     ],
     url: "https://github.com/arsh342/tic-tac-toe-react-native",
   },
 ];
 
+const achievements = [
+  {
+    title: "Hacktoberfest Contributor, 2025",
+    description:
+      "Awarded Hacktoberfest badge for accepted open-source contributions (Badge ID: cmgmeh4xb0018l104d4y49mwj)",
+  },
+  {
+    title: "GitHub Contributions",
+    description:
+      "200+ contributions across personal and open-source repositories (github.com/arsh342)",
+  },
+];
+
 const certifications = [
-  "AWS Cloud Practitioner Essentials",
-  "Spring Boot & Microservices (Udemy)",
+  "Introduction to Modern AI, 2025 — Cisco Networking Academy",
+  "Apply AI: Analyze Customer Reviews, 2025 — Cisco Networking Academy",
 ];
 
 function SectionTitle({ children }: { children: React.ReactNode }) {
@@ -102,8 +85,8 @@ function SectionTitle({ children }: { children: React.ReactNode }) {
 
 export default function ResumePage() {
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-[#e5e5e5]">
-      <div className="max-w-[800px] mx-auto px-6 py-8">
+    <div className="min-h-screen bg-[#0a0a0a] text-[#e5e5e5] overflow-x-hidden">
+      <div className="max-w-[800px] mx-auto px-4 sm:px-6 py-8">
         {/* Top bar */}
         <motion.div
           initial={{ opacity: 0, y: -10 }}
@@ -135,13 +118,21 @@ export default function ResumePage() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="mb-10"
         >
-          <h1 className="text-3xl font-mono font-bold text-[#e5e5e5] mb-2">
+          <h1 className="text-3xl font-mono font-bold text-[#e5e5e5] mb-3">
             {profile.name}
           </h1>
-          <p className="text-[13px] font-mono text-[#c97e3a] mb-4">
-            Software Engineer · Full-Stack & Backend Development
-          </p>
-          <div className="flex flex-wrap items-center gap-4 text-[11px] font-mono text-[#888]">
+          <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-[11px] font-mono text-[#888]">
+            <span className="flex items-center gap-1.5">
+              <MapPin size={12} />
+              Chandigarh, India
+            </span>
+            <a
+              href="tel:+919056054358"
+              className="flex items-center gap-1.5 hover:text-[#c97e3a] transition-colors"
+            >
+              <Phone size={12} />
+              +91 9056054358
+            </a>
             <a
               href={`mailto:${profile.links.email}`}
               className="flex items-center gap-1.5 hover:text-[#c97e3a] transition-colors"
@@ -167,24 +158,37 @@ export default function ResumePage() {
               <Linkedin size={12} />
               arsh342
             </a>
-            <span className="flex items-center gap-1.5">
-              <MapPin size={12} />
-              India
-            </span>
           </div>
         </motion.header>
 
-        {/* Summary */}
+        {/* Education */}
         <motion.section
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.15 }}
           className="mb-8"
         >
-          <SectionTitle>Summary</SectionTitle>
-          <p className="text-[12px] font-mono text-[#999] leading-relaxed">
-            {profile.about}
-          </p>
+          <SectionTitle>Education</SectionTitle>
+          {education.map((edu) => (
+            <div key={edu.degree}>
+              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-1">
+                <div>
+                  <h3 className="text-[13px] font-mono font-semibold text-[#e5e5e5]">
+                    {edu.degree}
+                  </h3>
+                  <p className="text-[11px] font-mono text-[#c97e3a]">
+                    {edu.school} — {edu.location}
+                  </p>
+                </div>
+                <span className="text-[10px] font-mono text-[#666] shrink-0 sm:ml-4 mt-1 sm:mt-0">
+                  {edu.period}
+                </span>
+              </div>
+              <p className="text-[11px] font-mono text-[#999] mt-1">
+                {edu.details}
+              </p>
+            </div>
+          ))}
         </motion.section>
 
         {/* Technical Skills */}
@@ -197,15 +201,41 @@ export default function ResumePage() {
           <SectionTitle>Technical Skills</SectionTitle>
           <div className="space-y-2.5">
             {[
-              { label: "Languages", items: profile.technicalSkills.languages },
-              { label: "Backend", items: profile.technicalSkills.backend },
-              { label: "Frontend", items: profile.technicalSkills.frontend },
-              { label: "Databases", items: profile.technicalSkills.databases },
-              { label: "Cloud & DevOps", items: profile.technicalSkills.cloud },
-              { label: "Concepts", items: profile.technicalSkills.concepts },
+              {
+                label: "Languages",
+                items: ["Java", "JavaScript", "TypeScript", "Python"],
+              },
+              {
+                label: "Backend",
+                items: [
+                  "Spring Boot",
+                  "Node.js",
+                  "Express.js",
+                  "REST API Design",
+                ],
+              },
+              { label: "Databases", items: ["MongoDB", "MySQL", "PostgreSQL"] },
+              { label: "Cloud & DevOps", items: ["AWS", "Docker"] },
+              {
+                label: "Frontend",
+                items: ["React", "Next.js", "React Native"],
+              },
+              {
+                label: "Concepts",
+                items: [
+                  "Microservices Architecture",
+                  "JWT Authentication",
+                  "CI/CD",
+                  "Object-Oriented Programming",
+                  "Data Structures & Algorithms",
+                ],
+              },
             ].map((cat) => (
-              <div key={cat.label} className="flex items-start gap-3">
-                <span className="text-[10px] font-mono text-[#555] uppercase tracking-wider w-28 shrink-0 pt-0.5">
+              <div
+                key={cat.label}
+                className="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"
+              >
+                <span className="text-[10px] font-mono text-[#555] uppercase tracking-wider sm:w-28 shrink-0 pt-0.5">
                   {cat.label}
                 </span>
                 <div className="flex flex-wrap gap-1.5">
@@ -234,7 +264,7 @@ export default function ResumePage() {
           <div className="space-y-5">
             {projects.map((proj) => (
               <div key={proj.name}>
-                <div className="flex items-start justify-between mb-1">
+                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-1">
                   <div className="flex items-center gap-2">
                     <h3 className="text-[13px] font-mono font-semibold text-[#e5e5e5]">
                       {proj.name}
@@ -248,15 +278,25 @@ export default function ResumePage() {
                       <ExternalLink size={11} />
                     </a>
                   </div>
-                  <span className="text-[10px] font-mono text-[#666] shrink-0">
+                  <span className="text-[10px] font-mono text-[#666] shrink-0 sm:ml-4 mt-0.5 sm:mt-0">
                     {proj.tech}
                   </span>
                 </div>
-                <ul className="space-y-1">
+                {proj.live && (
+                  <a
+                    href={proj.live}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[10px] font-mono text-[#c97e3a]/70 hover:text-[#c97e3a] transition-colors"
+                  >
+                    {proj.live.replace("https://", "")}
+                  </a>
+                )}
+                <ul className="space-y-1 mt-1">
                   {proj.bullets.map((b, i) => (
                     <li
                       key={i}
-                      className="text-[11px] font-mono text-[#999] leading-relaxed pl-3 relative before:content-['›'] before:absolute before:left-0 before:text-[#c97e3a]"
+                      className="text-[11px] font-mono text-[#999] leading-relaxed pl-3 relative before:content-['–'] before:absolute before:left-0 before:text-[#555]"
                     >
                       {b}
                     </li>
@@ -267,80 +307,33 @@ export default function ResumePage() {
           </div>
         </motion.section>
 
-        {/* Experience */}
+        {/* Achievements */}
         <motion.section
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
           className="mb-8"
         >
-          <SectionTitle>Experience</SectionTitle>
-          <div className="space-y-4">
-            {experience.map((exp) => (
-              <div key={exp.role}>
-                <div className="flex items-start justify-between mb-1">
-                  <div>
-                    <h3 className="text-[13px] font-mono font-semibold text-[#e5e5e5]">
-                      {exp.role}
-                    </h3>
-                    <p className="text-[11px] font-mono text-[#c97e3a]">
-                      {exp.org}
-                    </p>
-                  </div>
-                  <span className="text-[10px] font-mono text-[#666] shrink-0">
-                    {exp.period}
-                  </span>
-                </div>
-                <ul className="space-y-1 mt-1.5">
-                  {exp.bullets.map((b, i) => (
-                    <li
-                      key={i}
-                      className="text-[11px] font-mono text-[#999] leading-relaxed pl-3 relative before:content-['›'] before:absolute before:left-0 before:text-[#c97e3a]"
-                    >
-                      {b}
-                    </li>
-                  ))}
-                </ul>
+          <SectionTitle>Achievements</SectionTitle>
+          <div className="space-y-3">
+            {achievements.map((a) => (
+              <div key={a.title}>
+                <h3 className="text-[12px] font-mono font-semibold text-[#e5e5e5]">
+                  {a.title}
+                </h3>
+                <p className="text-[11px] font-mono text-[#999] mt-0.5">
+                  {a.description}
+                </p>
               </div>
             ))}
           </div>
-        </motion.section>
-
-        {/* Education */}
-        <motion.section
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.35 }}
-          className="mb-8"
-        >
-          <SectionTitle>Education</SectionTitle>
-          {education.map((edu) => (
-            <div key={edu.degree}>
-              <div className="flex items-start justify-between mb-1">
-                <div>
-                  <h3 className="text-[13px] font-mono font-semibold text-[#e5e5e5]">
-                    {edu.degree}
-                  </h3>
-                  <p className="text-[11px] font-mono text-[#c97e3a]">
-                    {edu.school}
-                  </p>
-                </div>
-                <span className="text-[10px] font-mono text-[#666] shrink-0">
-                  {edu.period}
-                </span>
-              </div>
-              <p className="text-[11px] font-mono text-[#999] mt-1">
-                {edu.details}
-              </p>
-            </div>
-          ))}
         </motion.section>
 
         {/* Certifications */}
         <motion.section
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
+          transition={{ duration: 0.5, delay: 0.35 }}
           className="mb-16"
         >
           <SectionTitle>Certifications</SectionTitle>

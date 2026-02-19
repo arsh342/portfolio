@@ -171,35 +171,35 @@ export function Hero() {
         >
           portfolio
         </a>
-        <div className="flex items-center gap-2 sm:gap-5 text-[10px] sm:text-[11px] font-mono tracking-[0.1em] uppercase text-[#666]">
+        <div className="flex items-center gap-2 sm:gap-5 text-[10px] sm:text-[11px] font-mono tracking-[0.1em] uppercase">
           <a
             href={profile.links.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-[#e5e5e5] transition-colors cursor-pointer"
+            className="text-[#c97e3a] hover:text-[#e5e5e5] transition-colors cursor-pointer"
           >
             GitHub
           </a>
-          <span className="text-[#333] hidden sm:inline">/</span>
+          <span className="text-[#333]">/</span>
           <a
             href={profile.links.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-[#e5e5e5] transition-colors cursor-pointer"
+            className="text-[#c97e3a] hover:text-[#e5e5e5] transition-colors cursor-pointer"
           >
             LinkedIn
           </a>
           <span className="text-[#333] hidden sm:inline">/</span>
           <a
             href={`mailto:${profile.links.email}`}
-            className="hover:text-[#e5e5e5] transition-colors cursor-pointer hidden sm:inline"
+            className="text-[#c97e3a] hover:text-[#e5e5e5] transition-colors cursor-pointer hidden sm:inline"
           >
             Contact
           </a>
-          <span className="text-[#333] hidden sm:inline">/</span>
+          <span className="text-[#333]">/</span>
           <a
             href="/resume"
-            className="hover:text-[#e5e5e5] transition-colors cursor-pointer"
+            className="text-[#c97e3a] hover:text-[#e5e5e5] transition-colors cursor-pointer"
           >
             Resume
           </a>
