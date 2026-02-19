@@ -406,7 +406,7 @@ export async function fetchTrendingInterests(): Promise<TrendingInterest[]> {
     try {
       const searchQuery = `${query} created:>${dateStr}`;
       const res = await fetch(
-        `${GITHUB_API}/search/repositories?q=${encodeURIComponent(searchQuery)}&sort=stars&order=desc&per_page=3`,
+        `${GITHUB_API}/search/repositories?q=${encodeURIComponent(searchQuery)}&sort=stars&order=desc&per_page=2`,
         { headers, cache: "no-store" },
       );
       if (!res.ok) return { keyword, repos: [] };

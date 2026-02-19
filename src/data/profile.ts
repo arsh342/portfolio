@@ -518,15 +518,4 @@ export const profile = {
       ],
     },
   ],
-
-  topics: [
-    "nodejs",
-    "stripe",
-    "react",
-    "electron-app",
-    "reactjs",
-    "android",
-    "android-app",
-    "expo",
-  ],
 };

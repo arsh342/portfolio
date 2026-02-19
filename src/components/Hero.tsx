@@ -1,15 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-  Github,
-  Linkedin,
-  Twitter,
-  Mail,
-  ExternalLink,
-  Copy,
-  Share2,
-} from "lucide-react";
+import { ExternalLink, Copy, Share2 } from "lucide-react";
 import { profile } from "@/data/profile";
 import { useGitHubData } from "@/hooks/useGitHubData";
 import type { ContributionDay } from "@/lib/github";

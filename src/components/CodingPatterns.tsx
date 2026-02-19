@@ -7,7 +7,6 @@ import { Badge } from "./ui/Badge";
 import { profile } from "@/data/profile";
 import {
   GitCommitHorizontal,
-  GitBranch,
   FolderPlus,
   Star,
   TrendingUp,
@@ -149,8 +148,8 @@ export function CodingPatterns() {
               ))}
             </div>
           ) : data?.trendingInterests && data.trendingInterests.length > 0 ? (
-            <div className="space-y-3 max-h-[340px] overflow-y-auto pr-1 scrollbar-thin">
-              {data.trendingInterests.map((interest, i) => (
+            <div className="space-y-3 max-h-[180px] overflow-y-auto pr-1 scrollbar-thin">
+              {data.trendingInterests.slice(0, 6).map((interest, i) => (
                 <motion.div
                   key={interest.keyword}
                   initial={{ opacity: 0, x: -10 }}
