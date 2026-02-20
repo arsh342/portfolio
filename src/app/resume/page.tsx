@@ -10,6 +10,7 @@ import {
   MapPin,
   ExternalLink,
   Phone,
+  Globe,
 } from "lucide-react";
 import Link from "next/link";
 import { profile } from "@/data/profile";
@@ -30,9 +31,9 @@ const projects = [
     name: "CareerCompass",
     tech: "Next.js · TypeScript · Gemini AI · Stripe",
     bullets: [
-      "Developed AI-powered career platform for a hackathon submission on Devpost",
-      "Designed REST APIs and role-based authentication workflows and integrated Gemini AI and Stripe subscription workflows",
-      "Designed modular frontend architecture to support scalable feature additions and maintainable component structure",
+      "Developed AI-powered career platform for a Devpost hackathon submission",
+      "Designed RESTful backend services with role-based authentication and subscription workflows using Stripe",
+      "Integrated LLM APIs using structured prompt engineering and context-aware workflows",
     ],
     url: "https://github.com/arsh342/careercompass",
     live: "https://careercompassai.vercel.app",
@@ -41,19 +42,20 @@ const projects = [
     name: "Job Application Service",
     tech: "Java · Spring Boot · MongoDB",
     bullets: [
-      "Led a team project to design a RESTful backend using Spring Boot with JWT-based authentication, role separation, and modular service architecture",
-      "Modeled MongoDB schemas with indexing and validation to ensure efficient querying and consistent data integrity",
-      "Implemented centralized exception handling, request validation, and layered controller→service→repository structure to improve maintainability",
+      "Led a team project to design RESTful backend using Spring Boot with JWT-based authentication and modular service architecture",
+      "Modeled MongoDB schemas with indexing and validation for performance and data integrity",
+      "Implemented centralized exception handling and layered controller→service→repository architecture",
     ],
     url: "https://github.com/arsh342/Job-Application-Service",
   },
   {
     name: "GameVault Mobile App",
-    tech: "React Native",
+    tech: "React Native · Expo",
     bullets: [
       "Developed cross-platform mobile application with modular architecture and optimized state management; integrated Google AdMob and published to Play Store",
     ],
     url: "https://github.com/arsh342/tic-tac-toe-react-native",
+    live: "https://play.google.com/store/apps/details?id=com.boltexpo.tictactoe",
   },
 ];
 
@@ -71,8 +73,18 @@ const achievements = [
 ];
 
 const certifications = [
-  "Introduction to Modern AI, 2025 — Cisco Networking Academy",
-  "Apply AI: Analyze Customer Reviews, 2025 — Cisco Networking Academy",
+  {
+    name: "Model Context Protocol (Foundations & Advanced Topics), Claude Code, AI Fluency, 2026",
+    org: "Anthropic AI",
+  },
+  {
+    name: "Introduction to Modern AI, 2025",
+    org: "Cisco Networking Academy",
+  },
+  {
+    name: "Apply AI: Analyze Customer Reviews, 2025",
+    org: "Cisco Networking Academy",
+  },
 ];
 
 function SectionTitle({ children }: { children: React.ReactNode }) {
@@ -134,6 +146,15 @@ export default function ResumePage() {
               +91 9056054358
             </a>
             <a
+              href="https://arsh.engineer"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 hover:text-[#c97e3a] transition-colors"
+            >
+              <Globe size={12} />
+              arsh.engineer
+            </a>
+            <a
               href={`mailto:${profile.links.email}`}
               className="flex items-center gap-1.5 hover:text-[#c97e3a] transition-colors"
             >
@@ -160,6 +181,19 @@ export default function ResumePage() {
             </a>
           </div>
         </motion.header>
+
+        {/* Professional Summary */}
+        <motion.section
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.12 }}
+          className="mb-8"
+        >
+          <SectionTitle>Professional Summary</SectionTitle>
+          <p className="text-[11px] font-mono text-[#999] leading-relaxed">
+            {profile.about}
+          </p>
+        </motion.section>
 
         {/* Education */}
         <motion.section
@@ -203,7 +237,7 @@ export default function ResumePage() {
             {[
               {
                 label: "Languages",
-                items: ["Java", "JavaScript", "TypeScript", "Python"],
+                items: ["Java", "TypeScript", "JavaScript", "Python"],
               },
               {
                 label: "Backend",
@@ -215,6 +249,15 @@ export default function ResumePage() {
                 ],
               },
               { label: "Databases", items: ["MongoDB", "MySQL", "PostgreSQL"] },
+              {
+                label: "AI & LLM",
+                items: [
+                  "LLM API Integration",
+                  "Model Context Protocol (MCP)",
+                  "Prompt Engineering",
+                  "Context-Oriented Workflows",
+                ],
+              },
               { label: "Cloud & DevOps", items: ["AWS", "Docker"] },
               {
                 label: "Frontend",
@@ -226,7 +269,7 @@ export default function ResumePage() {
                   "Microservices Architecture",
                   "JWT Authentication",
                   "CI/CD",
-                  "Object-Oriented Programming",
+                  "System Design Fundamentals",
                   "Data Structures & Algorithms",
                 ],
               },
@@ -307,12 +350,32 @@ export default function ResumePage() {
           </div>
         </motion.section>
 
-        {/* Achievements */}
+        {/* Certifications */}
         <motion.section
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
           className="mb-8"
+        >
+          <SectionTitle>Certifications</SectionTitle>
+          <ul className="space-y-1">
+            {certifications.map((cert) => (
+              <li
+                key={cert.name}
+                className="text-[11px] font-mono text-[#999] pl-3 relative before:content-['›'] before:absolute before:left-0 before:text-[#c97e3a]"
+              >
+                {cert.name} — <span className="text-[#c97e3a]">{cert.org}</span>
+              </li>
+            ))}
+          </ul>
+        </motion.section>
+
+        {/* Achievements */}
+        <motion.section
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.35 }}
+          className="mb-16"
         >
           <SectionTitle>Achievements</SectionTitle>
           <div className="space-y-3">
@@ -327,26 +390,6 @@ export default function ResumePage() {
               </div>
             ))}
           </div>
-        </motion.section>
-
-        {/* Certifications */}
-        <motion.section
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.35 }}
-          className="mb-16"
-        >
-          <SectionTitle>Certifications</SectionTitle>
-          <ul className="space-y-1">
-            {certifications.map((cert) => (
-              <li
-                key={cert}
-                className="text-[11px] font-mono text-[#999] pl-3 relative before:content-['›'] before:absolute before:left-0 before:text-[#c97e3a]"
-              >
-                {cert}
-              </li>
-            ))}
-          </ul>
         </motion.section>
       </div>
     </div>

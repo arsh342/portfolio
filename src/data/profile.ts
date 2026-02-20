@@ -4,7 +4,7 @@ export const profile = {
   tagline: "creating & learning",
   avatar: "https://avatars.githubusercontent.com/u/135307874?v=4",
   about:
-    "Aspiring software engineer and Computer Science undergraduate, passionate about backend and full-stack development. Building hands-on expertise in Java, Spring Boot, and modern JavaScript frameworks through real-world projects. Actively learning RESTful API design, secure authentication systems, and cloud deployment with AWS and Docker. Exploring areas like microservices architecture, AI integration, and cross-platform development while strengthening foundations in data structures, object-oriented design, and database systems.",
+    "Aspiring backend software engineer focused on building AI-integrated systems and developer tooling. Hands-on experience designing RESTful services using Java, Spring Boot, and MongoDB, and integrating LLM APIs using structured prompt design and context-driven workflows.",
 
   technicalSkills: {
     languages: ["Java", "JavaScript", "TypeScript", "Python"],
@@ -230,7 +230,7 @@ export const profile = {
       tech: "TypeScript",
       stars: 0,
       url: "https://github.com/arsh342/tic-tac-toe-react-native",
-      live: "https://downloadapp.vercel.app/",
+      live: "https://play.google.com/store/apps/details?id=com.boltexpo.tictactoe",
       tags: ["React Native", "Expo", "Zustand", "AdMob"],
     },
     {
