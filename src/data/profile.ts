@@ -1,10 +1,21 @@
+type ProfileProject = {
+  name: string;
+  description: string;
+  tech: string;
+  stars: number;
+  url: string;
+  tags: string[];
+  live?: string;
+  forked?: boolean;
+};
+
 export const profile = {
   name: "Arshdeep Singh",
   username: "arsh342",
   tagline: "creating & learning",
   avatar: "https://avatars.githubusercontent.com/u/135307874?v=4",
   about:
-    "Aspiring backend software engineer focused on building AI-integrated systems and developer tooling. Hands-on experience designing RESTful services using Java, Spring Boot, and MongoDB, and integrating LLM APIs using structured prompt design and context-driven workflows.",
+    "Backend-focused full-stack computer science student building production-ready Java, Spring Boot, and Node.js systems across cloud platforms. Built multi-tenant logistics SaaS, AI-driven career tooling, and security-focused developer workflows, with work spanning scalable REST APIs, real-time synchronization, PostgreSQL/MongoDB/Supabase, and practical AI integration. Open to internship opportunities where I can contribute, learn, and keep shipping.",
 
   technicalSkills: {
     languages: ["Java", "JavaScript", "TypeScript", "Python"],
@@ -14,7 +25,9 @@ export const profile = {
       "Express.js",
       "FastAPI",
       "REST API Design",
+      "WebSocket APIs",
       "Socket.io",
+      "Sequelize",
       "Maven",
     ],
     frontend: [
@@ -46,6 +59,8 @@ export const profile = {
       "Spring Security",
       "Stripe Integration",
       "AI/LLM Integration",
+      "Security Scanning",
+      "Multi-Tenant Systems",
     ],
   },
 
@@ -61,7 +76,7 @@ export const profile = {
   links: {
     github: "https://github.com/arsh342",
     linkedin: "https://www.linkedin.com/in/arsh342",
-    twitter: "https://twitter.com/Thearshsran",
+    twitter: "https://x.com/Thearshsran",
     email: "arshth134@gmail.com",
   },
 
@@ -86,12 +101,27 @@ export const profile = {
 
   mostActive: [
     { name: "CareerCompass", commits: 185 },
+    { name: "dispatchCore", commits: 55 },
     { name: "Job-Application-Service", commits: 51 },
-    { name: "GameVault", commits: 48 },
-    { name: "CollabSpace", commits: 44 },
+    { name: "Athena", commits: 42 },
   ],
 
   technicalExpertise: [
+    {
+      title: "AI-Assisted Security & Code Analysis Tooling",
+      tags: ["TypeScript", "AST Parsing", "SAST", "Semgrep", "Supabase"],
+      indicators: [
+        "Builds developer tooling that detects likely AI-generated code using heuristic scoring",
+        "Runs multi-engine security analysis across secrets, dependency risks, static analysis, and hallucinated API usage",
+        "Ships analysis workflows through both CLI and web platform interfaces",
+      ],
+      evidence: [
+        {
+          name: "arsh342/athena",
+          url: "https://github.com/arsh342/athena",
+        },
+      ],
+    },
     {
       title: "Full-Stack Web Application Development",
       tags: [
@@ -110,12 +140,12 @@ export const profile = {
       ],
       evidence: [
         {
-          name: "arsh342/NotesApp",
-          url: "https://github.com/arsh342/NotesApp",
-        },
-        {
           name: "arsh342/careercompass",
           url: "https://github.com/arsh342/careercompass",
+        },
+        {
+          name: "arsh342/dispatchCore",
+          url: "https://github.com/arsh342/dispatchCore",
         },
       ],
     },
@@ -144,10 +174,6 @@ export const profile = {
       ],
       evidence: [
         {
-          name: "arsh342/NotesApp",
-          url: "https://github.com/arsh342/NotesApp",
-        },
-        {
           name: "arsh342/tic-tac-toe-react-native",
           url: "https://github.com/arsh342/tic-tac-toe-react-native",
         },
@@ -166,10 +192,6 @@ export const profile = {
           name: "arsh342/careercompass",
           url: "https://github.com/arsh342/careercompass",
         },
-        {
-          name: "arsh342/Gemini3",
-          url: "https://github.com/arsh342/Gemini3",
-        },
       ],
     },
     {
@@ -185,15 +207,31 @@ export const profile = {
           name: "arsh342/Job-Application-Service",
           url: "https://github.com/arsh342/Job-Application-Service",
         },
-        {
-          name: "arsh342/BE_ElaraRegency",
-          url: "https://github.com/arsh342/BE_ElaraRegency",
-        },
       ],
     },
   ],
 
   projects: [
+    {
+      name: "Athena",
+      description:
+        "AI code provenance and security analysis platform for JavaScript/TypeScript repositories. Combines an 11-signal heuristic scorer, TypeScript AST parsing, multi-engine security scanning, GitHub repo scans, live terminal streaming, and CLI pre-commit workflows.",
+      tech: "TypeScript",
+      stars: 0,
+      url: "https://github.com/arsh342/athena",
+      live: "https://athenacode.onrender.com",
+      tags: ["TypeScript", "React", "Express", "Supabase"],
+    },
+    {
+      name: "dispatchCore",
+      description:
+        "Real-time multi-tenant last-mile logistics dispatcher with live fleet tracking, dispatcher and driver dashboards, gig-driver marketplace, customer tracking, Firebase live updates, MySQL/Sequelize persistence, and concurrent assignment prevention.",
+      tech: "TypeScript",
+      stars: 0,
+      url: "https://github.com/arsh342/dispatchCore",
+      live: "https://www.dispatchcore.tech",
+      tags: ["React", "Node.js", "MySQL", "WebSockets"],
+    },
     {
       name: "CareerCompass",
       description:
@@ -233,56 +271,7 @@ export const profile = {
       live: "https://play.google.com/store/apps/details?id=com.boltexpo.tictactoe",
       tags: ["React Native", "Expo", "Zustand", "AdMob"],
     },
-    {
-      name: "Elara Regency",
-      description:
-        "Full-stack hotel management system with secure BCrypt-based password hashing, session-based authentication, role-based access control, and backend workflows for room availability, reservations, and user profiles.",
-      tech: "JavaScript",
-      stars: 0,
-      url: "https://github.com/arsh342/BE_ElaraRegency",
-      live: "https://elararegency-anmol.onrender.com/",
-      tags: ["Node.js", "Express", "MongoDB", "EJS"],
-      forked: true,
-    },
-    {
-      name: "NotesApp",
-      description:
-        "Cross-platform desktop notes application built with React, TypeScript, Vite, and Electron, implementing Firebase Authentication, real-time data synchronization, rich text editing, and liquid glass UI effects.",
-      tech: "TypeScript",
-      stars: 0,
-      url: "https://github.com/arsh342/NotesApp",
-      tags: ["React", "Electron", "TypeScript", "Firebase"],
-    },
-    {
-      name: "Mnemo",
-      description:
-        "Landing page for an intelligent tab management browser extension with ML-powered archiving, TF-IDF search, and 100% local privacy. Built with Next.js 16 and Framer Motion.",
-      tech: "TypeScript",
-      stars: 0,
-      url: "https://github.com/arsh342/mnemo",
-      live: "https://mnemoex.vercel.app/",
-      tags: ["Next.js", "Framer Motion", "Tailwind CSS"],
-    },
-    {
-      name: "Code Detective",
-      description:
-        "AI-powered code archaeology VS Code extension using Gemini 3. Features git history investigation, time travel timeline, tech debt scoring, expertise mapping, and multi-agent system. Built for Google DeepMind Gemini 3 Hackathon.",
-      tech: "TypeScript",
-      stars: 0,
-      url: "https://github.com/arsh342/Gemini3",
-      live: "https://marketplace.visualstudio.com/items?itemName=thunderBird.code-detective",
-      tags: ["VS Code", "Gemini 3", "TypeScript"],
-    },
-    {
-      name: "TicketBookingSystem",
-      description:
-        "Console-based ticket booking system in Java with admin dashboard, seat selection, SHA-256 authentication, route management for planes/trains/buses, and custom data structures including linked lists and hash maps.",
-      tech: "Java",
-      stars: 1,
-      url: "https://github.com/arsh342/TicketBookingSystem",
-      tags: ["Java", "DSA", "File I/O"],
-    },
-  ],
+  ] as ProfileProject[],
 
   codingPatterns: {
     totalCommits: 36,
@@ -309,6 +298,29 @@ export const profile = {
   },
 
   githubActivity: [
+    {
+      month: "May 2026",
+      events: [
+        {
+          type: "commits" as const,
+          description: "Advanced production work on AI security tooling and logistics SaaS",
+          repos: [
+            { name: "athena", commits: 42 },
+            { name: "dispatchCore", commits: 55 },
+          ],
+        },
+      ],
+    },
+    {
+      month: "Apr 2026",
+      events: [
+        {
+          type: "repos" as const,
+          description: "Created Athena, an AI code provenance and security analysis platform",
+          repos: [{ name: "athena", lang: "TypeScript" }],
+        },
+      ],
+    },
     {
       month: "Feb 2026",
       events: [
@@ -339,20 +351,16 @@ export const profile = {
       events: [
         {
           type: "commits" as const,
-          description: "Created 56 commits in 3 repositories",
+          description: "Created 44 commits in 2 repositories",
           repos: [
             { name: "careercompass", commits: 38 },
-            { name: "mnemo", commits: 12 },
             { name: "Portfolio", commits: 6 },
           ],
         },
         {
           type: "repos" as const,
-          description: "Created 2 repositories",
-          repos: [
-            { name: "mnemo", lang: "TypeScript" },
-            { name: "Portfolio", lang: "TypeScript" },
-          ],
+          description: "Created 1 repository",
+          repos: [{ name: "Portfolio", lang: "TypeScript" }],
         },
       ],
     },
@@ -361,10 +369,9 @@ export const profile = {
       events: [
         {
           type: "commits" as const,
-          description: "Created 89 commits in 3 repositories",
+          description: "Created 70 commits in 2 repositories",
           repos: [
             { name: "careercompass", commits: 62 },
-            { name: "NotesApp", commits: 19 },
             { name: "collabspace", commits: 8 },
           ],
         },
@@ -375,11 +382,10 @@ export const profile = {
       events: [
         {
           type: "commits" as const,
-          description: "Created 112 commits in 4 repositories",
+          description: "Created 103 commits in 3 repositories",
           repos: [
             { name: "careercompass", commits: 85 },
             { name: "collabspace", commits: 14 },
-            { name: "NotesApp", commits: 9 },
             { name: "tic-tac-toe-react-native", commits: 4 },
           ],
         },
@@ -404,11 +410,8 @@ export const profile = {
       events: [
         {
           type: "commits" as const,
-          description: "Created 65 commits in 2 repositories",
-          repos: [
-            { name: "Job-Application-Service", commits: 39 },
-            { name: "TicketBookingSystem", commits: 26 },
-          ],
+          description: "Created 39 commits in 1 repository",
+          repos: [{ name: "Job-Application-Service", commits: 39 }],
         },
       ],
     },
@@ -417,18 +420,22 @@ export const profile = {
   recentInterests: [
     "AI Agents",
     "LLMs",
+    "AI Code Security",
     "MCP Servers",
     "RAG",
     "Gemini",
     "OpenAI",
     "Anthropic",
     "Microservices",
+    "Logistics SaaS",
     "System Design",
     "Open Source",
   ],
 
   interests: [
     "AI Agents & LLM tooling (OpenAI, Anthropic, Gemini AI)",
+    "AI code provenance, SAST, and secure developer workflows",
+    "Real-time logistics, dispatch, and multi-tenant SaaS systems",
     "MCP Servers & Model Context Protocol ecosystem",
     "Microservices architecture & system design",
     "Open source contributions & developer tooling",
@@ -436,14 +443,22 @@ export const profile = {
 
   interestsCount: 10,
 
-  forked: [
-    {
-      name: "BE_ElaraRegency",
-      url: "https://github.com/arsh342/BE_ElaraRegency",
-    },
-  ],
-
   domainExpertise: [
+    {
+      title: "Real-Time Logistics & Dispatch Platforms",
+      tags: ["Multi-Tenant SaaS", "Firebase Realtime Database", "MySQL", "WebSockets"],
+      indicators: [
+        "Builds dispatcher, driver, customer, and platform-admin workflows for last-mile delivery",
+        "Implements real-time order, location, assignment, and marketplace bid updates",
+        "Designs data isolation and concurrency controls for multi-company logistics operations",
+      ],
+      evidence: [
+        {
+          name: "arsh342/dispatchCore",
+          url: "https://github.com/arsh342/dispatchCore",
+        },
+      ],
+    },
     {
       title: "Enterprise Job & Career Platform Development",
       tags: ["Spring Boot", "JWT", "OAuth2", "MySQL", "React"],
@@ -488,16 +503,8 @@ export const profile = {
       ],
       evidence: [
         {
-          name: "arsh342/NotesApp",
-          url: "https://github.com/arsh342/NotesApp",
-        },
-        {
           name: "arsh342/tic-tac-toe-react-native",
           url: "https://github.com/arsh342/tic-tac-toe-react-native",
-        },
-        {
-          name: "arsh342/mnemo",
-          url: "https://github.com/arsh342/mnemo",
         },
       ],
     },

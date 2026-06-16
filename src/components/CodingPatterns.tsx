@@ -148,7 +148,7 @@ export function CodingPatterns() {
               ))}
             </div>
           ) : data?.trendingInterests && data.trendingInterests.length > 0 ? (
-            <div className="space-y-3 max-h-[180px] overflow-y-auto pr-1 scrollbar-thin">
+            <div className="space-y-3 max-h-45 overflow-y-auto pr-1 scrollbar-thin">
               {data.trendingInterests.slice(0, 6).map((interest, i) => (
                 <motion.div
                   key={interest.keyword}
@@ -230,17 +230,17 @@ export function CodingPatterns() {
           </h3>
           <div className="relative">
             {/* Timeline line */}
-            <div className="absolute left-[5px] top-2 bottom-2 w-px bg-[#2a2a2a]" />
+            <div className="absolute left-1.25 top-2 bottom-2 w-px bg-[#2a2a2a]" />
 
             <div className="space-y-6">
               {loading
                 ? // Loading skeleton for activity timeline
                   Array.from({ length: 3 }).map((_, i) => (
                     <div key={i} className="pl-7 relative animate-pulse">
-                      <div className="absolute left-0 top-1 w-[11px] h-[11px] rounded-full border-2 border-[#333] bg-[#0a0a0a]" />
+                      <div className="absolute left-0 top-1 w-2.75 h-2.75 rounded-full border-2 border-[#333] bg-[#0a0a0a]" />
                       <div className="h-4 w-24 bg-[#1a1a1a] rounded mb-3" />
-                      <div className="h-3 w-full max-w-[250px] bg-[#1a1a1a] rounded mb-2" />
-                      <div className="h-3 w-2/3 max-w-[160px] bg-[#1a1a1a] rounded" />
+                      <div className="h-3 w-full max-w-62.5 bg-[#1a1a1a] rounded mb-2" />
+                      <div className="h-3 w-2/3 max-w-40 bg-[#1a1a1a] rounded" />
                     </div>
                   ))
                 : activityTimeline.map((month, mi) => (
@@ -253,7 +253,7 @@ export function CodingPatterns() {
                       className="pl-7 relative"
                     >
                       {/* Timeline dot */}
-                      <div className="absolute left-0 top-1 w-[11px] h-[11px] rounded-full border-2 border-[#c97e3a] bg-[#0a0a0a]" />
+                      <div className="absolute left-0 top-1 w-2.75 h-2.75 rounded-full border-2 border-[#c97e3a] bg-[#0a0a0a]" />
 
                       <h4 className="text-[12px] font-mono font-semibold text-[#e5e5e5] mb-3">
                         {month.month}

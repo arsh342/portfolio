@@ -1,93 +1,148 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-  Download,
-  ArrowLeft,
-  Mail,
-  Github,
-  Linkedin,
-  MapPin,
-  ExternalLink,
-  Phone,
-  Globe,
-} from "lucide-react";
+import { ArrowLeft, Download } from "lucide-react";
 import Link from "next/link";
+import type { ReactNode } from "react";
 import { profile } from "@/data/profile";
 
-const education = [
+type SkillGroup = {
+  label: string;
+  items: string[];
+};
+
+type Project = {
+  name: string;
+  subtitle: string;
+  sourceLabel: "GitHub" | "GitLab";
+  sourceUrl: string;
+  sourceText: string;
+  liveText?: string;
+  liveUrl?: string;
+  bullets: string[];
+};
+
+const summary =
+  "Backend-focused software engineer with strong foundations in Java, data structures, algorithms, multithreading, and object-oriented design. Experience building scalable REST APIs, concurrent systems, and production-ready backend services.";
+
+const skillGroups: SkillGroup[] = [
   {
-    degree: "Bachelor of Engineering in Computer Science",
-    school: "Chitkara University",
-    location: "Punjab, India",
-    period: "Aug 2023 – Jun 2027",
-    details:
-      "CGPA: 8.70 — Coursework: Data Structures, Operating Systems, DBMS, Computer Networks",
+    label: "Languages",
+    items: ["Java", "C++", "Python", "JavaScript", "TypeScript"],
+  },
+  {
+    label: "Core CS",
+    items: [
+      "Data Structures",
+      "Algorithms",
+      "OOP",
+      "Multithreading",
+      "DBMS",
+      "Operating Systems",
+    ],
+  },
+  {
+    label: "Backend",
+    items: [
+      "Spring Boot",
+      "Node.js",
+      "Express.js",
+      "REST APIs",
+      "JWT Authentication",
+      "Firebase",
+      "Maven",
+      "Tomcat",
+    ],
+  },
+  {
+    label: "Databases",
+    items: ["PostgreSQL", "MongoDB", "MySQL"],
+  },
+  {
+    label: "Tools",
+    items: ["Git", "Docker", "Linux/Unix", "Shell Scripting", "CI/CD", "GitHub Actions"],
   },
 ];
 
-const projects = [
+const projects: Project[] = [
   {
-    name: "CareerCompass",
-    tech: "Next.js · TypeScript · Gemini AI · Stripe",
+    name: "DispatchCore",
+    subtitle: "Multi-Tenant Logistics SaaS",
+    sourceLabel: "GitHub",
+    sourceUrl: "https://github.com/arsh342/dispatchCore",
+    sourceText: "github.com/arsh342/dispatchCore",
+    liveUrl: "https://dispatchcore.tech",
+    liveText: "dispatchcore.tech",
     bullets: [
-      "Developed AI-powered career platform for a Devpost hackathon submission",
-      "Designed RESTful backend services with role-based authentication and subscription workflows using Stripe",
-      "Integrated LLM APIs using structured prompt engineering and context-aware workflows",
+      "Built multi-tenant logistics platform supporting 5 user roles with modular REST services, tenant-aware middleware, and real-time delivery tracking",
+      "Integrated Firebase Authentication and Firebase Realtime Database for secure authentication and live order synchronization across tenants",
+      "Designed scalable backend workflows using Node.js, PostgreSQL, and Sequelize with transaction isolation, composite indexing, and optimized database query performance",
+      "Implemented transactional email workflows using Resend API integration",
     ],
-    url: "https://github.com/arsh342/careercompass",
-    live: "https://careercompassai.vercel.app",
   },
   {
     name: "Job Application Service",
-    tech: "Java · Spring Boot · MongoDB",
+    subtitle: "Spring Boot REST API",
+    sourceLabel: "GitHub",
+    sourceUrl: "https://github.com/arsh342/Job-Application-Service",
+    sourceText: "github.com/arsh342/Job-Application-Service",
     bullets: [
-      "Led a team project to design RESTful backend using Spring Boot with JWT-based authentication and modular service architecture",
-      "Modeled MongoDB schemas with indexing and validation for performance and data integrity",
-      "Implemented centralized exception handling and layered controller→service→repository architecture",
+      "Built layered Spring Boot backend deployed on Tomcat with Maven, JWT authentication, and centralized exception handling",
+      "Developed JSP-based frontend views served through Tomcat for job listing and application management workflows",
+      "Designed MySQL schemas with indexing and validation ensuring scalable CRUD operations and efficient query execution",
     ],
-    url: "https://github.com/arsh342/Job-Application-Service",
   },
   {
-    name: "GameVault Mobile App",
-    tech: "React Native · Expo",
+    name: "CareerCompass",
+    subtitle: "AI Career Platform",
+    sourceLabel: "GitHub",
+    sourceUrl: "https://github.com/arsh342/careercompass",
+    sourceText: "github.com/arsh342/careercompass",
+    liveUrl: "https://careercompassai.vercel.app",
+    liveText: "careercompassai.vercel.app",
     bullets: [
-      "Developed cross-platform mobile application with modular architecture and optimized state management; integrated Google AdMob and published to Play Store",
+      "Built backend services with role-based authentication, REST APIs, and subscription workflows for production deployment",
+      "Designed modular service architecture and integrated external LLM APIs into application workflows",
     ],
-    url: "https://github.com/arsh342/tic-tac-toe-react-native",
-    live: "https://play.google.com/store/apps/details?id=com.boltexpo.tictactoe",
+  },
+  {
+    name: "SecureFlow AI",
+    subtitle: "Multi-Agent Security Platform",
+    sourceLabel: "GitLab",
+    sourceUrl: "https://gitlab.com/gitlab-ai-hackathon/participants/34775220",
+    sourceText: "gitlab.com/gitlab-ai-hackathon/participants/34775220",
+    bullets: [
+      "Developed backend orchestration workflows for security scanning, secrets detection, and dependency vulnerability analysis",
+      "Implemented parallel task execution pipelines generating JSON compliance reports aligned with OWASP Top 10",
+    ],
+  },
+];
+
+const education = {
+  degree: "B.E. Computer Science",
+  school: "Chitkara University",
+  location: "Punjab, India",
+  period: "2023–2027",
+  details: "CGPA: 8.70",
+  coursework: "Data Structures, Algorithms, Operating Systems, DBMS",
+};
+
+const certifications = [
+  {
+    org: "Anthropic",
+    year: "2026",
+    name: "Model Context Protocol (Foundations & Advanced), Claude Code in Action",
   },
 ];
 
 const achievements = [
   {
     title: "Hacktoberfest Contributor, 2025",
-    description:
-      "Awarded Hacktoberfest badge for accepted open-source contributions (Badge ID: cmgmeh4xb0018l104d4y49mwj)",
-  },
-  {
-    title: "GitHub Contributions",
-    description:
-      "200+ contributions across personal and open-source repositories (github.com/arsh342)",
+    description: "Accepted open-source contributions",
   },
 ];
 
-const certifications = [
-  {
-    name: "Model Context Protocol (Foundations & Advanced Topics), Claude Code, AI Fluency, 2026",
-    org: "Anthropic AI",
-  },
-  {
-    name: "Introduction to Modern AI, 2025",
-    org: "Cisco Networking Academy",
-  },
-  {
-    name: "Apply AI: Analyze Customer Reviews, 2025",
-    org: "Cisco Networking Academy",
-  },
-];
-
-function SectionTitle({ children }: { children: React.ReactNode }) {
+function SectionTitle({ children }: { children: ReactNode }) {
   return (
     <h2 className="text-[10px] font-mono tracking-[0.25em] uppercase text-[#c97e3a] mb-4 pb-2 border-b border-[#2a2a2a]">
       {children}
@@ -98,8 +153,7 @@ function SectionTitle({ children }: { children: React.ReactNode }) {
 export default function ResumePage() {
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-[#e5e5e5] overflow-x-hidden">
-      <div className="max-w-[800px] mx-auto px-4 sm:px-6 py-8">
-        {/* Top bar */}
+      <div className="max-w-200 mx-auto px-4 sm:px-6 py-8">
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -123,7 +177,6 @@ export default function ResumePage() {
           </a>
         </motion.div>
 
-        {/* Header */}
         <motion.header
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
@@ -133,156 +186,85 @@ export default function ResumePage() {
           <h1 className="text-3xl font-mono font-bold text-[#e5e5e5] mb-3">
             {profile.name}
           </h1>
-          <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-[11px] font-mono text-[#888]">
-            <span className="flex items-center gap-1.5">
-              <MapPin size={12} />
-              Chandigarh, India
-            </span>
-            <a
-              href="tel:+919056054358"
-              className="flex items-center gap-1.5 hover:text-[#c97e3a] transition-colors"
-            >
-              <Phone size={12} />
-              +91 9056054358
-            </a>
-            <a
-              href="https://arsh.engineer"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 hover:text-[#c97e3a] transition-colors"
-            >
-              <Globe size={12} />
-              arsh.engineer
-            </a>
-            <a
-              href={`mailto:${profile.links.email}`}
-              className="flex items-center gap-1.5 hover:text-[#c97e3a] transition-colors"
-            >
-              <Mail size={12} />
-              {profile.links.email}
-            </a>
-            <a
-              href={profile.links.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 hover:text-[#c97e3a] transition-colors"
-            >
-              <Github size={12} />
-              arsh342
-            </a>
-            <a
-              href={profile.links.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 hover:text-[#c97e3a] transition-colors"
-            >
-              <Linkedin size={12} />
-              arsh342
-            </a>
+          <div className="space-y-1 text-[11px] font-mono text-[#888]">
+            <p className="flex flex-wrap items-center gap-x-2 gap-y-1">
+              <span>Chandigarh, India</span>
+              <span className="text-[#555]">|</span>
+              <a
+                href="tel:+919056054358"
+                className="hover:text-[#c97e3a] transition-colors"
+              >
+                +91 9056054358
+              </a>
+              <span className="text-[#555]">|</span>
+              <a
+                href={`mailto:${profile.links.email}`}
+                className="hover:text-[#c97e3a] transition-colors"
+              >
+                {profile.links.email}
+              </a>
+            </p>
+            <p className="flex flex-wrap items-center gap-x-2 gap-y-1">
+              <span>GitHub:</span>
+              <a
+                href={profile.links.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-[#c97e3a] transition-colors"
+              >
+                github.com/arsh342
+              </a>
+              <span>LinkedIn:</span>
+              <a
+                href={profile.links.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-[#c97e3a] transition-colors"
+              >
+                linkedin.com/in/arsh342
+              </a>
+              <a
+                href="https://arsh.engineer"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-[#c97e3a] transition-colors"
+              >
+                arsh.engineer
+              </a>
+            </p>
           </div>
         </motion.header>
 
-        {/* Professional Summary */}
         <motion.section
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.12 }}
           className="mb-8"
         >
-          <SectionTitle>Professional Summary</SectionTitle>
+          <SectionTitle>SUMMARY</SectionTitle>
           <p className="text-[11px] font-mono text-[#999] leading-relaxed">
-            {profile.about}
+            {summary}
           </p>
         </motion.section>
 
-        {/* Education */}
         <motion.section
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.15 }}
           className="mb-8"
         >
-          <SectionTitle>Education</SectionTitle>
-          {education.map((edu) => (
-            <div key={edu.degree}>
-              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-1">
-                <div>
-                  <h3 className="text-[13px] font-mono font-semibold text-[#e5e5e5]">
-                    {edu.degree}
-                  </h3>
-                  <p className="text-[11px] font-mono text-[#c97e3a]">
-                    {edu.school} — {edu.location}
-                  </p>
-                </div>
-                <span className="text-[10px] font-mono text-[#666] shrink-0 sm:ml-4 mt-1 sm:mt-0">
-                  {edu.period}
-                </span>
-              </div>
-              <p className="text-[11px] font-mono text-[#999] mt-1">
-                {edu.details}
-              </p>
-            </div>
-          ))}
-        </motion.section>
-
-        {/* Technical Skills */}
-        <motion.section
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="mb-8"
-        >
-          <SectionTitle>Technical Skills</SectionTitle>
+          <SectionTitle>SKILLS</SectionTitle>
           <div className="space-y-2.5">
-            {[
-              {
-                label: "Languages",
-                items: ["Java", "TypeScript", "JavaScript", "Python"],
-              },
-              {
-                label: "Backend",
-                items: [
-                  "Spring Boot",
-                  "Node.js",
-                  "Express.js",
-                  "REST API Design",
-                ],
-              },
-              { label: "Databases", items: ["MongoDB", "MySQL", "PostgreSQL"] },
-              {
-                label: "AI & LLM",
-                items: [
-                  "LLM API Integration",
-                  "Model Context Protocol (MCP)",
-                  "Prompt Engineering",
-                  "Context-Oriented Workflows",
-                ],
-              },
-              { label: "Cloud & DevOps", items: ["AWS", "Docker"] },
-              {
-                label: "Frontend",
-                items: ["React", "Next.js", "React Native"],
-              },
-              {
-                label: "Concepts",
-                items: [
-                  "Microservices Architecture",
-                  "JWT Authentication",
-                  "CI/CD",
-                  "System Design Fundamentals",
-                  "Data Structures & Algorithms",
-                ],
-              },
-            ].map((cat) => (
+            {skillGroups.map((group) => (
               <div
-                key={cat.label}
+                key={group.label}
                 className="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"
               >
                 <span className="text-[10px] font-mono text-[#555] uppercase tracking-wider sm:w-28 shrink-0 pt-0.5">
-                  {cat.label}
+                  {group.label}:
                 </span>
                 <div className="flex flex-wrap gap-1.5">
-                  {cat.items.map((item) => (
+                  {group.items.map((item) => (
                     <span
                       key={item}
                       className="text-[10px] font-mono text-[#bbb] bg-[#1a1a1a] border border-[#2a2a2a] px-2 py-0.5 rounded-sm"
@@ -296,52 +278,51 @@ export default function ResumePage() {
           </div>
         </motion.section>
 
-        {/* Projects */}
         <motion.section
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.25 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
           className="mb-8"
         >
-          <SectionTitle>Projects</SectionTitle>
-          <div className="space-y-5">
-            {projects.map((proj) => (
-              <div key={proj.name}>
-                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-1">
-                  <div className="flex items-center gap-2">
+          <SectionTitle>PROJECTS</SectionTitle>
+          <div className="space-y-6">
+            {projects.map((project) => (
+              <div key={project.name} className="pb-5 border-b border-[#1d1d1d] last:border-b-0 last:pb-0">
+                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1">
+                  <div>
                     <h3 className="text-[13px] font-mono font-semibold text-[#e5e5e5]">
-                      {proj.name}
+                      {project.name} - {project.subtitle}
                     </h3>
-                    <a
-                      href={proj.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-[#555] hover:text-[#c97e3a] transition-colors"
-                    >
-                      <ExternalLink size={11} />
-                    </a>
+                    <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-[10px] font-mono text-[#666]">
+                      <span>{project.sourceLabel}:</span>
+                      <a
+                        href={project.sourceUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[#c97e3a]/80 hover:text-[#c97e3a] transition-colors inline-flex items-center gap-1"
+                      >
+                        {project.sourceText}
+                      </a>
+                      {project.liveUrl && project.liveText && (
+                        <>
+                          <span>Live:</span>
+                          <a
+                            href={project.liveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-[#c97e3a]/80 hover:text-[#c97e3a] transition-colors inline-flex items-center gap-1"
+                          >
+                            {project.liveText}
+                          </a>
+                        </>
+                      )}
+                    </div>
                   </div>
-                  <span className="text-[10px] font-mono text-[#666] shrink-0 sm:ml-4 mt-0.5 sm:mt-0">
-                    {proj.tech}
-                  </span>
                 </div>
-                {proj.live && (
-                  <a
-                    href={proj.live}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-[10px] font-mono text-[#c97e3a]/70 hover:text-[#c97e3a] transition-colors"
-                  >
-                    {proj.live.replace("https://", "")}
-                  </a>
-                )}
-                <ul className="space-y-1 mt-1">
-                  {proj.bullets.map((b, i) => (
-                    <li
-                      key={i}
-                      className="text-[11px] font-mono text-[#999] leading-relaxed pl-3 relative before:content-['–'] before:absolute before:left-0 before:text-[#555]"
-                    >
-                      {b}
+                <ul className="mt-2 space-y-1 list-disc pl-5 marker:text-[#555]">
+                  {project.bullets.map((bullet) => (
+                    <li key={bullet} className="text-[11px] font-mono text-[#999] leading-relaxed">
+                      {bullet}
                     </li>
                   ))}
                 </ul>
@@ -350,46 +331,71 @@ export default function ResumePage() {
           </div>
         </motion.section>
 
-        {/* Certifications */}
+        <motion.section
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.25 }}
+          className="mb-8"
+        >
+          <SectionTitle>EDUCATION</SectionTitle>
+          <div>
+            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1">
+              <div>
+                <h3 className="text-[13px] font-mono font-semibold text-[#e5e5e5]">
+                  {education.degree} - {education.school}
+                </h3>
+                <p className="text-[11px] font-mono text-[#c97e3a]">
+                  {education.details} - {education.location}
+                </p>
+              </div>
+              <span className="text-[10px] font-mono text-[#666] shrink-0 sm:ml-4 mt-1 sm:mt-0">
+                {education.period}
+              </span>
+            </div>
+            <p className="text-[11px] font-mono text-[#999] mt-1">
+              Coursework: {education.coursework}
+            </p>
+          </div>
+        </motion.section>
+
         <motion.section
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
           className="mb-8"
         >
-          <SectionTitle>Certifications</SectionTitle>
+          <SectionTitle>CERTIFICATIONS</SectionTitle>
           <ul className="space-y-1">
             {certifications.map((cert) => (
               <li
                 key={cert.name}
                 className="text-[11px] font-mono text-[#999] pl-3 relative before:content-['›'] before:absolute before:left-0 before:text-[#c97e3a]"
               >
-                {cert.name} — <span className="text-[#c97e3a]">{cert.org}</span>
+                {cert.org}, {cert.year} -{" "}
+                <span className="text-[#c97e3a]">{cert.name}</span>
               </li>
             ))}
           </ul>
         </motion.section>
 
-        {/* Achievements */}
         <motion.section
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.35 }}
           className="mb-16"
         >
-          <SectionTitle>Achievements</SectionTitle>
-          <div className="space-y-3">
-            {achievements.map((a) => (
-              <div key={a.title}>
-                <h3 className="text-[12px] font-mono font-semibold text-[#e5e5e5]">
-                  {a.title}
-                </h3>
-                <p className="text-[11px] font-mono text-[#999] mt-0.5">
-                  {a.description}
-                </p>
-              </div>
+          <SectionTitle>ACHIEVEMENTS</SectionTitle>
+          <ul className="space-y-1">
+            {achievements.map((achievement) => (
+              <li
+                key={achievement.title}
+                className="text-[11px] font-mono text-[#999] pl-3 relative before:content-['›'] before:absolute before:left-0 before:text-[#c97e3a]"
+              >
+                <span className="text-[#e5e5e5]">{achievement.title}</span> -{" "}
+                {achievement.description}
+              </li>
             ))}
-          </div>
+          </ul>
         </motion.section>
       </div>
     </div>

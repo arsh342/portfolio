@@ -105,8 +105,8 @@ export function Footer() {
   const links = [
     {
       icon: <Twitter size={14} />,
-      label: "twitter",
-      value: "https://twitter.com/Thearshsran",
+      label: "x",
+      value: "x.com/Thearshsran",
       url: profile.links.twitter,
     },
     {
@@ -161,7 +161,7 @@ export function Footer() {
             {link.icon}
             <span className="text-[#555]">{link.label}</span>
             <span className="text-[#999] hidden sm:inline">·</span>
-            <span className="truncate max-w-[140px] sm:max-w-[200px] hidden sm:inline">
+            <span className="truncate max-w-35 sm:max-w-50 hidden sm:inline">
               {link.value}
             </span>
           </motion.a>

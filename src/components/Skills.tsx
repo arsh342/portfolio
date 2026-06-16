@@ -40,7 +40,7 @@ export function Skills() {
             {activeTab === tab.key && (
               <motion.div
                 layoutId="skillsTab"
-                className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#c97e3a]"
+                className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#c97e3a]"
               />
             )}
           </button>

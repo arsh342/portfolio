@@ -21,8 +21,8 @@ export default function Home() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: loaded ? 1 : 0 }}
-        transition={{ duration: 0.6 }}
-        className="max-w-[1400px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12"
+        transition={{ duration: 0.35 }}
+        className="max-w-350 mx-auto px-4 sm:px-6 md:px-8 lg:px-12"
       >
         <Hero />
         <About />
